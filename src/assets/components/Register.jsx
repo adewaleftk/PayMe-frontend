@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     phoneNumber: '',
     password: '',
@@ -34,7 +36,9 @@ const Register = () => {
       }
 
       const successData = await response.json();
-      console.log(successData.msg); // Handle successful registration
+      console.log(successData); 
+      navigate('/login');
+      // Handle successful registration
 
       // Optionally, you can redirect the user to another page after successful registration.
       // For example: history.push('/login');
