@@ -1,15 +1,10 @@
-import  { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useBalanceStore from '../../../store';
 
 const Dashboard = () => {
-  const [balance, setBalance] = useState(0);
+  const balance = useBalanceStore((state) => state.balance);
   const navigate = useNavigate();
 
-  // Fetch user's balance upon component mount (you may need to make an API call)
-  useEffect(() => {
-    // Fetch user's balance here and set it using setBalance
-    // Example: fetchBalance().then((balance) => setBalance(balance));
-  }, []);
 
   const handleDeposit = () => {
     // Implement deposit logic and navigate to the deposit page

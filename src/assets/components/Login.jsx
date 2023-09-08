@@ -10,7 +10,7 @@ function Login() {
 
   const { email, password } = formData;
   const navigate = useNavigate();
-  const setBalance = useBalanceStore();
+  const { setBalance } = useBalanceStore();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
