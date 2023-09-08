@@ -48,7 +48,7 @@ function Login() {
       } else {
         // Sign-in failed, handle error response
         const errorData = await response.json();
-        console.error('Sign-in failed:', errorData);
+        console.error('Sign-in failed:', errorData.msg);
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
