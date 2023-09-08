@@ -39,10 +39,11 @@ function Login() {
       if (response.ok) {
         // Successful sign-in, parse the response JSON
         const data = await response.json();
-  
+        console.log(data.token);
+        console.log(data.balance);
         // Store the JWT token or perform other actions as needed
         console.log('Successfully signed in:', data);
-        navigate('/deposit');
+        navigate('/dashboard');
   
         // You can redirect the user to another page or update the UI here
       } else {
