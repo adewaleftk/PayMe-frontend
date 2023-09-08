@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 // Create a Zustand store
-const useBalanceStore = create((set) => ({
+const usePackageStore = create((set) => ({
   balance: 0, // Initial balance value
 
   // Function to set the balance
@@ -9,6 +9,21 @@ const useBalanceStore = create((set) => ({
 
   // Function to update the balance (add or subtract)
   updateBalance: (amount) => set((state) => ({ balance: state.balance + amount })),
+
+
+  userToken: localStorage.getItem('userToken') || null,
+  login: (token) => {
+    set({ userToken: token });
+    localStorage.setItem('userToken', token);
+  },
+  logout: () => {
+    set({ userToken: null });
+    localStorage.removeItem('userToken');
+  },
+
+
 }));
 
-export default useBalanceStore;
+
+
+export default usePackageStore;
