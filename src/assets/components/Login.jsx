@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useBalanceStore from '../../../store';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ function Login() {
 
   const { email, password } = formData;
   const navigate = useNavigate();
+  const setBalance = useBalanceStore();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -41,6 +43,7 @@ function Login() {
         const data = await response.json();
         console.log(data.token);
         console.log(data.balance);
+        setBalance(data.balance);
         // Store the JWT token or perform other actions as needed
         console.log('Successfully signed in:', data);
         navigate('/dashboard');
