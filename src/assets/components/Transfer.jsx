@@ -11,7 +11,7 @@ function Transfer() {
 
     // Create an object to send in the POST request
     const transferData = {
-      recipientPhoneNumber: receiverAccountNumber, // Adjust the field name if needed
+      receiverAccountNumber, // Adjust the field name if needed
       amount,
     };
 
