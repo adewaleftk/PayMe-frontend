@@ -18,7 +18,7 @@ const Dashboard = () => {
 
   const handleTransactionHistory = () => {
     // Implement transaction history logic and navigate to the history page
-    navigate('/transaction-history');
+    navigate('/history');
   };
 
   const handleLogout = () => {
