@@ -26,6 +26,11 @@ const Dashboard = () => {
     navigate('/login');
   };
 
+  const handleTransfer = () => {
+    // Implement logout logic (e.g., clearing tokens, session) and navigate to the login page
+    navigate('/transfer');
+  };
+
   return (
     <div>
       <h2>Dashboard</h2>
@@ -35,6 +40,7 @@ const Dashboard = () => {
       <div>
         <button onClick={handleDeposit}>Deposit</button>
         <button onClick={handleWithdraw}>Withdraw</button>
+        <button onClick={handleTransfer}>Transfer</button>
         <button onClick={handleTransactionHistory}>Transaction History</button>
         <button onClick={handleLogout}>Logout</button>
       </div>
