@@ -37,7 +37,9 @@ function TransactionHistory() {
       <ul>
         {transactions.map((transaction) => (
           <li key={transaction._id}>
-            Transaction Amount: {transaction.amount}
+            Amount: {transaction.amount}
+            Type: {transaction.type}
+            Time: {transaction.timestamp}
             {/* Add more details from your Transaction model */}
           </li>
         ))}
