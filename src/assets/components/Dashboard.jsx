@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
-import useBalanceStore from '../../../store';
+import usePackageStore from '../../../store';
 
 const Dashboard = () => {
-  const balance = useBalanceStore((state) => state.balance);
+  const balance = usePackageStore((state) => state.balance);
+  const logout = usePackageStore(state => state.logout);
   const navigate = useNavigate();
 
 
@@ -18,11 +19,13 @@ const Dashboard = () => {
 
   const handleTransactionHistory = () => {
     // Implement transaction history logic and navigate to the history page
+
     navigate('/history');
   };
 
   const handleLogout = () => {
     // Implement logout logic (e.g., clearing tokens, session) and navigate to the login page
+    logout();
     navigate('/login');
   };
 
