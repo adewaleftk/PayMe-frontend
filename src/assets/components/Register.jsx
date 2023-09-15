@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/register.css'
 
 const Register = () => {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Register = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error(errorData); // Handle registration errors
+        console.error(errorData);
         return;
       }
 
