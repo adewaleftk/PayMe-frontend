@@ -1,46 +1,41 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePackageStore from '../../../store';
+import './dashboard.css'; // Import the CSS file
 
 const Dashboard = () => {
   const balance = usePackageStore((state) => state.balance);
-  const logout = usePackageStore(state => state.logout);
+  const logout = usePackageStore((state) => state.logout);
   const navigate = useNavigate();
 
-
   const handleDeposit = () => {
-    // Implement deposit logic and navigate to the deposit page
     navigate('/deposit');
   };
 
   const handleWithdraw = () => {
-    // Implement withdraw logic and navigate to the withdraw page
     navigate('/withdraw');
   };
 
   const handleTransactionHistory = () => {
-    // Implement transaction history logic and navigate to the history page
-
     navigate('/history');
   };
 
   const handleLogout = () => {
-    // Implement logout logic (e.g., clearing tokens, session) and navigate to the login page
     logout();
     navigate('/login');
   };
 
   const handleTransfer = () => {
-    // Implement logout logic (e.g., clearing tokens, session) and navigate to the login page
     navigate('/transfer');
   };
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <div>
+    <div className="dashboard-container">
+      <h2 className="dashboard-title">Dashboard</h2>
+      <div className="balance">
         <p>Balance: {balance}</p>
       </div>
-      <div>
+      <div className="action-buttons">
         <button onClick={handleDeposit}>Deposit</button>
         <button onClick={handleWithdraw}>Withdraw</button>
         <button onClick={handleTransfer}>Transfer</button>

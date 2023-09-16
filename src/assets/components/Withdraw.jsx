@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import usePackageStore from '../../../store';
+import '../styles/withdraw.css';
 
-const Withdraw = () => {
+function Withdraw() {
   const [amount, setAmount] = useState('');
   const userToken = usePackageStore(state => state.userToken);
 
@@ -40,17 +41,18 @@ const Withdraw = () => {
   };
 
   return (
-    <div>
-      <h2>Withdraw</h2>
+    <div className="withdraw-container">
+      <h2 className="withdraw-title">Withdraw</h2>
       <input
         type="number"
+        className="withdraw-input"
         placeholder="Enter amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <button onClick={handleWithdraw}>Withdraw</button>
+      <button onClick={handleWithdraw} className="withdraw-button">Withdraw</button>
     </div>
   );
-};
+}
 
 export default Withdraw;

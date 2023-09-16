@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import usePackageStore from '../../../store';
+import '../styles/transfer.css';
 
 function Transfer() {
   const [receiverAccountNumber, setReceiverAccountNumber] = useState('');
@@ -43,26 +44,28 @@ function Transfer() {
   };
 
   return (
-    <div>
-      <h2>Transfer Funds</h2>
+    <div className="transfer-container">
+      <h2 className="transfer-title">Transfer Funds</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Receiver&apos;s Account Number:</label>
+        <div className="form-group">
+          <label className="form-label">Receiver's Account Number:</label>
           <input
             type="text"
+            className="form-input"
             value={receiverAccountNumber}
             onChange={(e) => setReceiverAccountNumber(e.target.value)}
           />
         </div>
-        <div>
-          <label>Amount:</label>
+        <div className="form-group">
+          <label className="form-label">Amount:</label>
           <input
             type="number"
+            className="form-input"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
-        <button type="submit">Transfer</button>
+        <button type="submit" className="submit-button">Transfer</button>
       </form>
     </div>
   );

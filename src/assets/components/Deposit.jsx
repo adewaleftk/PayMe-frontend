@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import usePackageStore from '../../../store';
+import './deposit.css'; // Import the CSS file
 
 const Deposit = () => {
   const [amount, setAmount] = useState('');
@@ -40,15 +41,16 @@ const Deposit = () => {
   };
 
   return (
-    <div>
-      <h2>Deposit</h2>
+    <div className="deposit-container">
+      <h2 className="deposit-title">Deposit</h2>
       <input
+        className="deposit-input"
         type="number"
         placeholder="Enter amount"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
-      <button onClick={handleDeposit}>Deposit</button>
+      <button className="deposit-button" onClick={handleDeposit}>Deposit</button>
     </div>
   );
 };

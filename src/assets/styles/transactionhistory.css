@@ -1,0 +1,42 @@
+/* Add styles for the TransactionHistory component here */
+
+.transaction-history-container {
+  background-color: #f8f8f8;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.transaction-history-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.transaction-list {
+  list-style: none;
+  padding: 0;
+}
+
+.transaction-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.transaction-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.transaction-amount {
+  font-weight: bold;
+}
+
+.transaction-type {
+  color: #007bff;
+}
+
+.transaction-time {
+  color: #999;
+}

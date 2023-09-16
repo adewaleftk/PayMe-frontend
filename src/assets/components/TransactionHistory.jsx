@@ -1,6 +1,6 @@
-// src/components/TransactionHistory.js
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import usePackageStore from '../../../store';
+import '../styles/transactionhistory.css';
 
 function TransactionHistory() {
   const [transactions, setTransactions] = useState([]);
@@ -32,15 +32,17 @@ function TransactionHistory() {
   }, [userToken]);
 
   return (
-    <div>
-      <h2>Transaction History</h2>
-      <ul>
+    <div className="transaction-history-container">
+      <h2 className="transaction-history-title">Transaction History</h2>
+      <ul className="transaction-list">
         {transactions.map((transaction) => (
-          <li key={transaction._id}>
-            Amount: {transaction.amount}
-            Type: {transaction.type}
-            Time: {transaction.timestamp}
-            {/* Add more details from your Transaction model */}
+          <li key={transaction._id} className="transaction-item">
+            <div className="transaction-details">
+              <p className="transaction-amount">Amount: {transaction.amount}</p>
+              <p className="transaction-type">Type: {transaction.type}</p>
+              <p className="transaction-time">Time: {transaction.timestamp}</p>
+              {/* Add more details from your Transaction model */}
+            </div>
           </li>
         ))}
       </ul>
