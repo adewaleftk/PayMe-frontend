@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import usePackageStore from '../../../store';
-import './deposit.css'; // Import the CSS file
+import '../styles/deposit.css'; // Import the CSS file
 
 const Deposit = () => {
   const [amount, setAmount] = useState('');
