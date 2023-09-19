@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePackageStore from '../../../store';
-import './dashboard.css'; // Import the CSS file
+import '../styles/dashboard.css'; // Import the CSS file
 
 const Dashboard = () => {
   const balance = usePackageStore((state) => state.balance);
