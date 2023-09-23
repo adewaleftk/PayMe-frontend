@@ -8,6 +8,7 @@ const Dashboard = () => {
   const [balance, setBalance] = useState(null);
   const logout = usePackageStore((state) => state.logout);
   const navigate = useNavigate();
+  const userToken = usePackageStore(state => state.userToken);
 
   const handleDeposit = () => {
     navigate('/deposit');
@@ -33,19 +34,26 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const response = await fetch('https://payme-backend.onrender.com/api/v1/balance'); // Adjust the API endpoint URL
+        const response = await fetch('https://payme-backend.onrender.com/api/v1/balance', {
+          headers: {
+            'x-auth-token': userToken,
+          },
+        });
+  
         if (!response.ok) {
           throw new Error('Failed to fetch balance');
         }
+  
         const data = await response.json();
         setBalance(data.balance);
       } catch (error) {
         console.error('Error fetching balance:', error);
       }
     };
-
+  
     fetchBalance();
   }, []);
+  
 
   return (
     <div className="dashboard-container">
