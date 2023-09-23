@@ -52,7 +52,7 @@ function Login() {
         setBalance(data.balance);
         const userToken = data.token;
         login(userToken);
-        localStorage.setItem(userToken);
+        // localStorage.setItem(userToken);
         setLoginSuccess(true);
         // Store the JWT token or perform other actions as needed
         console.log('Successfully signed in:', data);
