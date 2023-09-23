@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import usePackageStore from '../../../store';
 import '../styles/withdraw.css';
+import { useNavigate } from 'react-router-dom';
+import Success from '../images/try-success.png'
 
 function Withdraw() {
   const [amount, setAmount] = useState('');
+  const [withdrawSuccess, setWithdrawSuccess] = useState(false);
+  const [withdrawError, setWithdrawError] = useState(null);
   const userToken = usePackageStore(state => state.userToken);
+  const navigate = useNavigate();
 
   const handleWithdraw = async () => {
+    setWithdrawError(null);
     try {
       // Create an object to send in the POST request body
       const withdrawData = {
@@ -27,11 +33,16 @@ function Withdraw() {
         // Successful deposit, handle the response or show a success message
         const data = await response.json();
         console.log('Withdraw successful:', data.msg);
+        setWithdrawSuccess(true);
+        setTimeout(() => {
+          navigate('/dashboard'); // Redirect to dashboard
+        }, 5000);
         // You can update the UI or show a success message here
       } else {
         // Deposit failed, handle error response
         const errorData = await response.json();
         console.error('Withdraw failed:', errorData.msg);
+        setWithdrawError(errorData.msg);
         // Handle and display the error message to the user
       }
     } catch (error) {
@@ -50,7 +61,17 @@ function Withdraw() {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
       />
+        {withdrawError && <p className="error-message">{withdrawError}</p>}
       <button onClick={handleWithdraw} className="withdraw-button">Withdraw</button>
+      {withdrawSuccess && (
+        <div className="login-success-popup">
+          <div className="login-success-body">
+            <h2>Withdraw Successful</h2>
+            <img src={Success} />
+            <p>You are now being redirected to your Dashboard</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

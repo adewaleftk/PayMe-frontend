@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePackageStore from '../../../store';
 import '../styles/login.css'
+import Success from '../images/try-success.png'
 
 function Login() {
   const login = usePackageStore(state => state.login);
@@ -12,6 +13,8 @@ function Login() {
 
   const { email, password } = formData;
   const navigate = useNavigate();
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loginError, setLoginError] = useState(null);
   const { setBalance } = usePackageStore();
 
   const handleChange = (e) => {
@@ -20,6 +23,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoginError(null); 
   
     // Extract the email and password from the formData object
     const { email, password } = formData;
@@ -48,15 +52,20 @@ function Login() {
         setBalance(data.balance);
         const userToken = data.token;
         login(userToken);
+        localStorage.setItem(userToken);
+        setLoginSuccess(true);
         // Store the JWT token or perform other actions as needed
         console.log('Successfully signed in:', data);
-        navigate('/dashboard');
+        setTimeout(() => {
+          navigate('/dashboard'); // Redirect to dashboard
+        }, 5000); 
   
         // You can redirect the user to another page or update the UI here
       } else {
         // Sign-in failed, handle error response
         const errorData = await response.json();
         console.error('Sign-in failed:', errorData.msg);
+        setLoginError(errorData.msg); 
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
@@ -87,8 +96,18 @@ function Login() {
             onChange={handleChange}
           />
         </div>
+        {loginError && <p className="error-message">{loginError}</p>}
         <button type="submit">Sign In</button>
       </form>
+      {loginSuccess && (
+        <div className="login-success-popup">
+          <div className="login-success-body">
+            <h2>Login Successful</h2>
+            <img src={Success} />
+            <p>You are now being redirected to your Dashboard</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

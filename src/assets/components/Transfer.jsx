@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import usePackageStore from '../../../store';
 import '../styles/transfer.css';
+import { useNavigate } from 'react-router-dom';
+import Success from '../images/try-success.png'
 
 function Transfer() {
+  const [transferSuccess, setTransferSuccess] = useState(false);
+  const [transferError, setTransferError] = useState(null);
+  const navigate = useNavigate();
   const [receiverAccountNumber, setReceiverAccountNumber] = useState('');
   const [amount, setAmount] = useState(0);
   const userToken = usePackageStore(state => state.userToken);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setTransferError(null);
 
     // Create an object to send in the POST request
     const transferData = {
@@ -22,7 +28,6 @@ function Transfer() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Include the authentication token if required
           'x-auth-token': userToken,
         },
         body: JSON.stringify(transferData),
@@ -31,11 +36,16 @@ function Transfer() {
       if (response.ok) {
         // Successful transfer, you can handle success here
         console.log('Transfer successful');
+        setTransferSuccess(true);
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 5000);
         // Optionally, reset the form fields or navigate to another page
       } else {
         // Transfer failed, handle error response
         const errorData = await response.json();
         console.error('Transfer failed:', errorData.msg);
+        setTransferError(errorData.msg);
       }
     } catch (error) {
       console.error('Error during transfer:', error);
@@ -65,8 +75,18 @@ function Transfer() {
             onChange={(e) => setAmount(e.target.value)}
           />
         </div>
+        {transferError && <p className="error-message">{transferError}</p>}
         <button type="submit" className="submit-button">Transfer</button>
       </form>
+      {transferSuccess && (
+        <div className="login-success-popup">
+          <div className="login-success-body">
+            <h2>Transfer Successful</h2>
+            <img src={Success} />
+            <p>You are now being redirected to your Dashboard</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
