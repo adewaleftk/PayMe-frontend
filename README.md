@@ -8,8 +8,6 @@ PayMe is your go-to platform for managing your finances seamlessly. Check balanc
 
 ## Features
 
-List the key features or functionalities of your project.
-
 - **Account Balance:** View your account balance in real-time.
 - **Deposits:** Easily make deposits into your account.
 - **Withdrawals:** Withdraw cash when you need it.
