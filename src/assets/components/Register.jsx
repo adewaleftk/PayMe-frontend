@@ -103,7 +103,7 @@ const Register = () => {
           />
         </div>
         <button onClick={handleSubmit} type="submit">Register</button>
-        <p>Have an account already?</p>
+        <p style={{textAlign: 'center'}}>Have an account already?</p>
         <button onClick={handleLogin} type="submit">Login</button>
       </>
     </div>
