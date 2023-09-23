@@ -18,6 +18,11 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  function handleLogin(e) {
+    e.preventDefault();
+    navigate('/login');
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -51,7 +56,7 @@ const Register = () => {
   return (
     <div>
       <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+      <>
         <div>
           <label>Phone Number</label>
           <input
@@ -97,8 +102,9 @@ const Register = () => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Register</button>
-      </form>
+        <button onClick={handleSubmit} type="submit">Register</button>
+        <button onClick={handleLogin} type="submit">Login</button>
+      </>
     </div>
   );
 };
