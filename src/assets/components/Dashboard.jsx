@@ -1,26 +1,12 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import usePackageStore from '../../../store';
-import '../styles/dashboard.css';
+import '../styles/dashboard.css'; // Import the CSS file
 
 const Dashboard = () => {
-  const balance = usePackageStore((state) => state.balance);
+  const [balance, setBalance] = useState(null);
   const logout = usePackageStore((state) => state.logout);
   const navigate = useNavigate();
-
-  // Load balance from local storage when the component mounts
-  useEffect(() => {
-    const storedBalance = localStorage.getItem('balance');
-    if (storedBalance) {
-      // Parse the stored balance as a number
-      usePackageStore.setState({ balance: parseFloat(storedBalance) });
-    }
-  }, []);
-
-  // Save the balance to local storage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('balance', balance.toString());
-  }, [balance]);
 
   const handleDeposit = () => {
     navigate('/deposit');
@@ -43,12 +29,33 @@ const Dashboard = () => {
     navigate('/transfer');
   };
 
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const response = await fetch('https://payme-backend.onrender.com/api/v1/balance'); // Adjust the API endpoint URL
+        if (!response.ok) {
+          throw new Error('Failed to fetch balance');
+        }
+        const data = await response.json();
+        setBalance(data.balance);
+      } catch (error) {
+        console.error('Error fetching balance:', error);
+      }
+    };
+
+    fetchBalance();
+  }, []);
+
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-title">Dashboard</h2>
-      <div className="balance">
-        <p>Balance: {balance}</p>
-      </div>
+      {balance !== null ? (
+        <div className="balance">
+          <p>Balance: {balance}</p>
+        </div>
+      ) : (
+        <p>Loading balance...</p>
+      )}
       <div className="action-buttons">
         <button onClick={handleDeposit}>Deposit</button>
         <button onClick={handleWithdraw}>Withdraw</button>
