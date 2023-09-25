@@ -41,7 +41,10 @@ function TransactionHistory() {
               <p className="transaction-amount">Amount: {transaction.amount}</p>
               <p className="transaction-type">Type: {transaction.type}</p>
               <p className="transaction-time">Time: {transaction.timestamp}</p>
-              {/* Add more details from your Transaction model */}
+              {transaction.sender && (
+                <p className="transaction-time">Sender: {transaction.sender.accountNumber}</p>
+                // Add more details from your Transaction model
+              )}
             </div>
           </li>
         ))}
