@@ -24,6 +24,4 @@ const usePackageStore = create((set) => ({
 
 }));
 
-
-
 export default usePackageStore;
